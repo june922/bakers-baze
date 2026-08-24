@@ -1,3 +1,4 @@
+import { CartProvider } from "@/src/components/storefront/CartProvider";
 import { getTemplate } from "@/src/templates/registry";
 import { loadStorefrontData } from "./data";
 
@@ -27,9 +28,11 @@ export default async function BakeryStorefrontLayout({
 
   return (
     <div className="flex flex-1 flex-col" style={{ "--accent": accentColor } as React.CSSProperties}>
-      <template.Header data={data} />
-      <div className="flex flex-1 flex-col">{children}</div>
-      <template.Footer data={data} />
+      <CartProvider bakerySlug={data.bakery.slug}>
+        <template.Header data={data} />
+        <div className="flex flex-1 flex-col">{children}</div>
+        <template.Footer data={data} />
+      </CartProvider>
     </div>
   );
 }

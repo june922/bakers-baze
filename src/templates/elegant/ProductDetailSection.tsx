@@ -2,8 +2,10 @@ import type { ProductDetail } from "@/src/modules/products/products.types";
 import type { TemplateSectionProps } from "@/src/templates/types";
 import ProductCustomizer from "./ProductCustomizer";
 
-export default function ProductDetailSection({ product }: TemplateSectionProps & { product: ProductDetail }) {
-  const primaryImage = product.images[0]?.url;
+export default function ProductDetailSection({ data, product }: TemplateSectionProps & { product: ProductDetail }) {
+  const primaryImage = product.images[0]?.url ?? null;
+  const category = product.categoryId ? data.categories.find((c) => c.id === product.categoryId) : undefined;
+  const categorySlug = category?.slug ?? "uncategorized";
 
   return (
     <section className="mx-auto grid max-w-5xl gap-10 px-6 py-12 sm:grid-cols-2">
@@ -20,12 +22,16 @@ export default function ProductDetailSection({ product }: TemplateSectionProps &
           <h1 className="text-3xl font-semibold">{product.name}</h1>
           {product.description && <p className="mt-3 text-zinc-700 dark:text-zinc-300">{product.description}</p>}
           {product.orderingMode === "request_confirm" && (
-            <p className="mt-3 text-sm text-[#8a5a3b] dark:text-[#e0b48c]">
+            <p className="mt-3 text-sm text-[var(--accent)]">
               This item is made to order — the baker will confirm availability before it&apos;s finalized.
             </p>
           )}
         </div>
-        <ProductCustomizer product={product} />
+        <ProductCustomizer
+          product={product}
+          categorySlug={categorySlug}
+          imageUrl={primaryImage}
+        />
       </div>
     </section>
   );

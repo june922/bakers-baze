@@ -5,6 +5,7 @@ import { requireBaker } from "@/src/modules/auth/auth.service";
 
 const NAV_LINKS = [
   { href: "/dashboard", label: "Overview" },
+  { href: "/dashboard/orders", label: "Orders" },
   { href: "/dashboard/categories", label: "Categories" },
   { href: "/dashboard/products", label: "Products" },
   { href: "/dashboard/settings", label: "Storefront settings" },
