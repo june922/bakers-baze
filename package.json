@@ -5,22 +5,32 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "next start -p ${PORT:-3000}",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "knex migrate:latest",
+    "db:migrate:rollback": "knex migrate:rollback",
+    "db:smoke": "tsx scripts/db-smoke-test.ts"
   },
   "dependencies": {
+    "knex": "^3.1.0",
     "next": "16.3.2",
+    "pg": "^8.13.1",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.11.10",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^16.4.5",
     "eslint": "^9",
     "eslint-config-next": "16.3.2",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   }
 }
